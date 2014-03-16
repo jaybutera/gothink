@@ -9,13 +9,7 @@ type Net interface {
     Epoch()
 }
 
-type Vector interface {
-    Activation() *Vector
-}
-
-type InputLayer struct {
-    //Vector
-    ID          string
+type Layer struct {
     Activation  string
     Weights     [][]float64
 }
@@ -25,8 +19,7 @@ A feed forward type neural network
 */
 type FFNet struct {
     //Net
-    //Layers []InputLayer // Change to interface{}
-    Layers map[string]InputLayer // Change to interface{}
+    Layers []Layer
 }
 
 /*
@@ -44,7 +37,11 @@ func NewFFNet (filePath string) *FFNet {
 */
 
 func FromJson (filepath string) (*FFNet, error) {
-    b, _ := ioutil.ReadFile(filepath)
+    b, err := ioutil.ReadFile(filepath)
+
+    if err != nil {
+        panic(err)
+    }
 
     ff := FFNet{}
     return &ff, json.Unmarshal(b, &ff)
