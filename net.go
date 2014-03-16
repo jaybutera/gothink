@@ -43,8 +43,8 @@ func NewFFNet (filePath string) *FFNet {
 }
 */
 
-func FromJson (jsonStr string) (*FFNet, error) {
-    b := []byte(jsonStr)
+func FromJson (filepath string) (*FFNet, error) {
+    b, _ := ioutil.ReadFile(filepath)
 
     ff := FFNet{}
     return &ff, json.Unmarshal(b, &ff)
