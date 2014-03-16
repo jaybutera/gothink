@@ -22,21 +22,7 @@ type FFNet struct {
     Layers []Layer
 }
 
-/*
-func NewFFNet (filePath string) *FFNet {
-    f := FFNet{}
-    //f.Layers = make([]InputLayer, 1) // Change to interface{}
-    _, err := ioutil.ReadFile(filePath)
-
-    if err != nil {
-        panic("failed to load" + filePath)
-    }
-
-    return (&f)
-}
-*/
-
-func FromJson (filepath string) (*FFNet, error) {
+func NewFFNet (filepath string) (*FFNet, error) {
     b, err := ioutil.ReadFile(filepath)
 
     if err != nil {
