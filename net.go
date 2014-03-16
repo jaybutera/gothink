@@ -14,34 +14,49 @@ type Vector interface {
 }
 
 type InputLayer struct {
-    Vector
-    V []float64
+    //Vector
+    ID          string
+    Activation  string
+    Weights     [][]float64
 }
 
 /*
 A feed forward type neural network
 */
 type FFNet struct {
-    Net
-    Layers map[string]interface{}
+    //Net
+    //Layers []InputLayer // Change to interface{}
+    Layers map[string]InputLayer // Change to interface{}
 }
 
+/*
 func NewFFNet (filePath string) *FFNet {
     f := FFNet{}
-    f.Layers = make(map[string]interface{})
-    enc, err := ioutil.ReadFile(filePath)
+    //f.Layers = make([]InputLayer, 1) // Change to interface{}
+    _, err := ioutil.ReadFile(filePath)
 
     if err != nil {
         panic("failed to load" + filePath)
     }
 
-    var objmap map[string]*json.RawMessage
-    json.Unmarshal(enc, &objmap)
+    return (&f)
+}
+*/
 
-    //json.Unmarshal(*objmap["Layers"], &f.Layers)
-    return &f
+func FromJson (jsonStr string) (*FFNet, error) {
+    b := []byte(jsonStr)
 
+    ff := FFNet{}
+    return &ff, json.Unmarshal(b, &ff)
+}
 
+/*
+func (ff *FFNet) ToJson (jsonStr string) error {
+    var data = &ff.Layers
+}
+*/
+
+/*
 func EncFFNet () ([]byte, error) {
     f := FFNet{}
 
@@ -51,3 +66,4 @@ func EncFFNet () ([]byte, error) {
     f.Layers["two"] = []float64{.0, .1}
     return json.Marshal(f)
 }
+*/
