@@ -33,11 +33,20 @@ func NewFFNet (filepath string) (*FFNet, error) {
     return &ff, json.Unmarshal(b, &ff)
 }
 
-/*
-func (ff *FFNet) ToJson (jsonStr string) error {
-    var data = &ff.Layers
+func (ff *FFNet) ToJson (filepath string) ([]byte, error) {
+    if filepath != "" {
+        d, err := json.Marshal(&ff)
+
+        if err != nil{
+            panic(err)
+        }
+
+        err1 := ioutil.WriteFile(filepath, d, 0644)
+
+        return d, err1
+    }
+    return json.Marshal(&ff)
 }
-*/
 
 /*
 func EncFFNet () ([]byte, error) {
