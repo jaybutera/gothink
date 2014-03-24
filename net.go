@@ -14,6 +14,23 @@ type Layer struct {
     Weights     [][]float64
 }
 
+func (L *Layer) Eval () {
+    sem := make(chan empty )
+    for i, _ := range L.Weights {
+        go func () {
+            sum = 0
+            for _, n := range L.Weights[i] {
+                sum += n
+            }
+            sigmoid(&L.Weights[i])
+        }
+    }
+}
+
+func sigmoid (L *Layer) {
+    return 1.0 / (1.0 + math.Exp(-sum))
+}
+
 /*
 A feed forward type neural network
 */
@@ -24,7 +41,6 @@ type FFNet struct {
 
 func NewFFNet (filepath string) (*FFNet, error) {
     b, err := ioutil.ReadFile(filepath)
-
     if err != nil {
         panic(err)
     }
@@ -47,15 +63,3 @@ func (ff *FFNet) ToJson (filepath string) ([]byte, error) {
     }
     return json.Marshal(&ff)
 }
-
-/*
-func EncFFNet () ([]byte, error) {
-    f := FFNet{}
-
-    f.Layers = make(map[string]interface{})
-
-    f.Layers["one"] = []float64{.5, .2}
-    f.Layers["two"] = []float64{.0, .1}
-    return json.Marshal(f)
-}
-*/
