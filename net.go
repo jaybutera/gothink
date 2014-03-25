@@ -14,20 +14,34 @@ type Layer struct {
     Weights     [][]float64
 }
 
+/*
 func (L *Layer) Eval () {
     sem := make(chan empty )
-    for i, _ := range L.Weights {
+    for i, l := range L.Weights {
         go func () {
-            sum = 0
+            sum := 0
             for _, n := range L.Weights[i] {
                 sum += n
             }
-            sigmoid(&L.Weights[i])
+            // If L.Activation == "sigmoid"
+            a := sigmoid(sum)
+            // Testing
+            e := 1.0/float64(i) - a
         }
     }
 }
 
-func sigmoid (L *Layer) {
+func (L *Layer) activate () float64 {
+    sum := 0
+    for _, n := range L.Weights[i] {
+        sum += n
+    }
+    // If L.Activation == "sigmoid"
+    return sigmoid(sum)
+}
+*/
+
+func sigmoid (sum int64) {
     return 1.0 / (1.0 + math.Exp(-sum))
 }
 
