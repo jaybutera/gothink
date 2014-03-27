@@ -1,4 +1,6 @@
 gothink
 =======
 
-Another damn neural network library, written in Go!
+You want to use this? Too bad. I'm still building it.
+
+Real documentation pending...
