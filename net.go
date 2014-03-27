@@ -3,6 +3,7 @@ package gothink
 import (
     "encoding/json"
     "io/ioutil"
+    "math"
 )
 
 type Net interface {
@@ -40,10 +41,6 @@ func (L *Layer) activate () float64 {
     return sigmoid(sum)
 }
 */
-
-func sigmoid (sum int64) {
-    return 1.0 / (1.0 + math.Exp(-sum))
-}
 
 /*
 A feed forward type neural network
