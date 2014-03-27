@@ -9,6 +9,7 @@ type DataSet struct {
     Inputs, Outputs [][]float64
 }
 
+/*
 func (d *DataSet) Inputs (i int) []float64{
     return d.inputs[i]
 }
@@ -16,6 +17,7 @@ func (d *DataSet) Inputs (i int) []float64{
 func (d *DataSet) Outputs (i int) []float64{
     return d.outputs[i]
 }
+*/
 
 func NewDataSet (filepath string) (*DataSet, error) {
     b, err := ioutil.ReadFile(filepath)
