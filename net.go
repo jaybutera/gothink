@@ -3,7 +3,6 @@ package gothink
 import (
     "encoding/json"
     "io/ioutil"
-    "math"
 )
 
 type Net interface {
@@ -11,43 +10,32 @@ type Net interface {
 }
 
 type Layer struct {
-    Activation  string
-    Weights     [][]float64
+    Activator
+    Neurons     map[uint32]Neuron
 }
 
-/*
 func (L *Layer) Eval () {
-    sem := make(chan empty )
-    for i, l := range L.Weights {
-        go func () {
-            sum := 0
-            for _, n := range L.Weights[i] {
-                sum += n
-            }
-            // If L.Activation == "sigmoid"
-            a := sigmoid(sum)
-            // Testing
-            e := 1.0/float64(i) - a
-        }
-    }
-}
+    sem := make(chan float64, len(L))
 
-func (L *Layer) activate () float64 {
-    sum := 0
-    for _, n := range L.Weights[i] {
-        sum += n
+    for i, n := range n.Weights {
+        go func () {
+            n.Eval()
+            delta := n.Val * (1 - n.Val) * (t.i - n.Val)
+        }()
     }
-    // If L.Activation == "sigmoid"
-    return sigmoid(sum)
 }
-*/
 
 /*
 A feed forward type neural network
 */
 type FFNet struct {
     //Net
+    Input []float64
     Layers []Layer
+}
+
+func (nn *FFNet) Update () {
+
 }
 
 func NewFFNet (filepath string) (*FFNet, error) {
